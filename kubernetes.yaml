@@ -1,0 +1,47 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: api-ingress
+spec:
+  backend:
+    serviceName: api
+    servicePort: 9090
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: api
+spec:
+  type: NodePort
+  ports:
+  - port: 9090
+    targetPort: api-port
+  selector:
+    name: server
+
+---
+kind: Deployment
+apiVersion: extensions/v1beta1
+metadata:
+  name: server
+spec:
+  replicas: 1
+  template:
+    metadata:
+      name: server
+      labels:
+        name: server
+    spec:
+      containers:
+      - name: server
+        image: eu.gcr.io/caglabs-155116/cluster-1-nodejs-mini-server:1
+        env:
+        - name: NODE_ENV
+          value: prod
+        - name: VERSION
+          value: '1'
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 9090
+          name: api-port
