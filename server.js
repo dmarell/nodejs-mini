@@ -12,11 +12,6 @@ router.get('/version', function (req, res) {
     });
 });
 
-// Kubernetes readiness probe
-router.get('/', function (req, res) {
-    res.json({message: 'node-mini API'});
-});
-
 // Register routes
 app.use('/', router);
 
