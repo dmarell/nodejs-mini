@@ -35,7 +35,7 @@ spec:
     spec:
       containers:
       - name: server
-        image: eu.gcr.io/<YOUR GCR PROJECT NAME>/cluster-1-nodejs-mini-server:1
+        image: eu.gcr.io/<project-id>/<cluster-name>-nodejs-mini-server:1
         env:
         - name: NODE_ENV
           value: prod

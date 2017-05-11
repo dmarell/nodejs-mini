@@ -5,7 +5,15 @@ const app = require('express')();
 
 console.log('Environment:', app.get('env'));
 
+// Implement reply for the default gcloud http-health-checks
+// router.get('/', function (req, res) {
+//     res.json({
+//         message: 'nodejs-mini API'
+//     });
+// });
+
 router.get('/version', function (req, res) {
+    console.log('Received GET /version');
     res.json({
         value: process.env.VERSION,
         deployed: process.env.DEPLOY_TIMESTAMP
