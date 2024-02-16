@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
-image=eu.gcr.io/<project-id>/<cluster-name>-nodejs-mini-server:1
+project_id=my_project
+cluster_name=cluster-1
+version=1
+
+image=eu.gcr.io/${project_id}/${cluster_name}-nodejs-mini-server:${version}
 docker build -t ${image} .
 gcloud docker -- push ${image}
 kubectl apply -f kubernetes.yaml
